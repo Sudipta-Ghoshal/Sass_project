@@ -1,0 +1,280 @@
+@use "sidebar" as s;
+@use '../util/' as u;
+@use "../global/" as g;
+
+.content main {
+    width: 100%;
+    padding: 2.25rem 1.5rem;
+    max-height: calc(100vh - 3.5rem);
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        grid-gap: 16px;
+        flex-wrap: wrap;
+
+        .left {
+            h1 {
+                font-size: 36px;
+                font-weight: 600;
+                margin-bottom: 10px;
+                color: var(--dark);
+            }
+
+            .breadcrumb {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 0 0;
+                list-style: none;
+
+                .breadcrumb-item+.breadcrumb-item {
+                    padding-left: 1rem;
+
+                    &::before {
+                        padding-right: 1rem;
+                        color: #6c757d;
+                        content: var(--bs-breadcrumb-divider, "/");
+                    }
+                }
+
+                .breadcrumb-item {
+                    color: var(--dark)-gray;
+
+                    &.active {
+                        color: g.$primary;
+                        pointer-events: none;
+                    }
+
+                }
+            }
+
+
+        }
+
+        .report {
+            height: 2.25rem;
+            padding: 0 1rem;
+            border-radius: 2.25rem;
+            background: g.$primary;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.625rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    }
+
+    .insights {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-gap: 24px;
+        margin-top: 36px;
+
+        @media screen and (max-width: 575px) {
+            grid-template-columns: 1fr;
+        }
+
+        li {
+            padding: 24px;
+            background: var(--light);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            grid-gap: 24px;
+            cursor: pointer;
+            flex-wrap: wrap;
+            transition: u.$basic-transation;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+            &:hover {
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+            }
+
+            &:nth-child(1) .bx {
+                background: var(--light)-primary;
+                color: g.$primary;
+            }
+
+            &:nth-child(2) .bx {
+                background: var(--light)-warning;
+                color: g.$warning;
+            }
+
+            &:nth-child(3) .bx {
+                background: var(--light)-success;
+                color: g.$success;
+            }
+
+            &:nth-child(4) .bx {
+                background: var(--light)-danger;
+                color: g.$danger;
+            }
+
+            .bx {
+                width: 80px;
+                height: 80px;
+                border-radius: 10px;
+                font-size: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .info {
+                h3 {
+                    font-size: 24px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    .bottom_data {
+        display: flex;
+        flex-wrap: wrap;
+        grid-gap: 24px;
+        margin-top: 24px;
+        width: 100%;
+        color: var(--dark);
+
+        >div {
+            border-radius: 20px;
+            background: var(--light);
+            padding: 24px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            overflow-x: auto;
+        }
+
+        .header {
+            margin-bottom: 24px;
+
+            @media screen and (max-width: 575px) {
+                min-width: 320px;
+            }
+
+            h3 {
+                margin-right: auto;
+                font-size: 24px;
+                font-weight: 600;
+            }
+        }
+
+        .orders {
+            flex-grow: 1;
+            flex-basis: 500px;
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+
+                @media screen and (max-width: 575px) {
+                    min-width: 360px;
+                }
+
+                th {
+                    padding-bottom: 12px;
+                    font-size: 13px;
+                    text-align: left;
+                    border-bottom: 1px solid var(--gray);
+                }
+
+                tbody {
+                    tr {
+                        cursor: pointer;
+                        transition: u.$basic-transation;
+
+                        &:hover {
+                            background: var(--gray);
+                        }
+
+                        td {
+                            padding: 16px 0;
+
+                            &:first-child {
+                                display: flex;
+                                align-items: center;
+                                grid-gap: 12px;
+                                padding-left: 6px;
+                            }
+
+                            img {
+                                width: 36px;
+                                height: 36px;
+                                border-radius: 50%;
+                                object-fit: cover;
+                            }
+
+                            .status {
+                                font-size: 10px;
+                                padding: 6px 16px;
+                                color: var(--light);
+                                border-radius: 20px;
+                                font-weight: 700;
+
+                                &.completed {
+                                    background: g.$success;
+                                }
+
+                                &.pending {
+                                    background: g.$warning;
+                                }
+
+                                &.process {
+                                    background: g.$primary;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .reminders {
+            flex-grow: 1;
+            flex-basis: 300px;
+
+            .task-list {
+                width: 100%;
+
+                @media screen and (max-width: 575px) {
+                    min-width: 320px;
+                }
+
+                li {
+                    width: 100%;
+                    margin-bottom: 16px;
+                    background: var(--gray);
+                    padding: 14px 10px;
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    &:last-child {
+                        margin-bottom: 0px;
+                    }
+
+                    .task-title {
+                        display: flex;
+                        align-items: center;
+
+                        p {
+                            margin-left: 6px;
+                        }
+                    }
+
+                    &.completed {
+                        border-left: 10px solid g.$success;
+                    }
+
+                    &.not-completed {
+                        border-left: 10px solid g.$danger;
+                    }
+                }
+            }
+        }
+    }
+}

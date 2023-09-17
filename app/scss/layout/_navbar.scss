@@ -1,0 +1,198 @@
+@use "sidebar" as s;
+@use '../util/' as u;
+@use "../global/" as g;
+
+
+$height: 1.563rem;
+$width: calc($height * 2);
+$position: 4px;
+$toggleBall: calc($height - $position * 2);
+
+
+// navbar
+.content {
+    position: relative;
+    width: calc(100% - s.$side-bar-width);
+    left: s.$side-bar-width;
+    transition: u.$basic-transation;
+
+    nav {
+        height: 3.5rem;
+        background-color: var(--light);
+        position: sticky;
+        top: 0;
+        left: 0;
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+        padding-inline: 0px 1.5rem;
+        z-index: 1000;
+
+        .bx.bx-menu {
+            cursor: pointer;
+        }
+
+        form {
+            max-width: 25rem;
+            width: 100%;
+            margin-right: auto;
+
+            &.show {
+                &~a {
+                    display: none;
+                }
+
+                .form_input {
+                    input {
+                        width: 100%;
+                        flex: 1;
+                        padding: 0rem 1rem;
+                        opacity: 1;
+                        visibility: visible;
+                    }
+
+                    button {
+                        width: 40px;
+                        height: 100%;
+                        border-radius: 0rem 2.25rem 2.25rem 0rem;
+                        background-color: var(--danger);
+                        color: var(--light);
+                    }
+
+
+                }
+            }
+
+            .form_input {
+                display: flex;
+                align-items: center;
+                height: 36px;
+
+                input {
+                    flex: 1;
+                    padding: 0rem 1rem;
+                    height: 100%;
+                    width: 100%;
+                    border: none;
+                    background-color: var(--gray);
+                    outline: none;
+                    border-radius: 2.25rem 0rem 0rem 2.25rem;
+                    transition: u.$basic-transation;
+
+
+                    &::placeholder {
+                        font-family: u.$primary-font;
+                    }
+
+                    @media screen and (max-width: 575px) {
+                        width: 0px;
+                        opacity: 0;
+                        flex: 0;
+                        visibility: hidden;
+                        padding: 0;
+                    }
+                }
+
+                button {
+                    width: 5rem;
+                    height: 100%;
+                    display: grid;
+                    place-items: center;
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    background-color: var(--primary);
+                    color: var(--light);
+                    border-radius: 0rem 2.25rem 2.25rem 0rem;
+
+                    @media screen and (max-width: 575px) {
+                        width: auto;
+                        height: auto;
+                        background-color: transparent;
+                        color: var(--dark);
+                        border-radius: 0px;
+                    }
+                }
+            }
+        }
+
+
+        .theme_toggle {
+            cursor: pointer;
+            width: $width;
+            min-width: $width;
+            height: $height;
+            background: var(--gray);
+            display: block;
+            border-radius: 6.25rem;
+            position: relative;
+            transition: u.$basic-transation;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: $position;
+                left: $position;
+                height: $toggleBall;
+                width: $toggleBall;
+                background: var(--primary);
+                border-radius: 50%;
+                transition: u.$basic-transation;
+            }
+        }
+
+
+        #theme_toggle:checked+label::before {
+            background: #fff;
+            transition: u.$basic-transation;
+            left: calc(100% - $position);
+            transform: translateX(-100%);
+            transition: u.$basic-transation;
+        }
+
+
+        .notific {
+            position: relative;
+
+            .count {
+                position: absolute;
+                top: -6px;
+                right: -6px;
+                width: 20px;
+                height: 20px;
+                background: var(--danger);
+                color: var(--light);
+                border-radius: 50%;
+                border: 2px solid var(--light);
+                font-weight: 700;
+                font-size: .75rem;
+                display: grid;
+                place-items: center;
+            }
+        }
+
+        .profile img {
+            width: 2.25rem;
+            max-width: 2.25rem;
+            height: 2.25rem;
+            object-fit: cover;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 2.5rem;
+            height: 2.5rem;
+            left: 0;
+            bottom: -40px;
+            border-radius: 50%;
+            box-shadow: -1.25rem -1.25rem 0rem var(--light);
+        }
+    }
+}
+
+.side_bar.close~.content {
+    width: calc(100% - s.$side-bar-collapsed);
+    left: s.$side-bar-collapsed;
+    transition: u.$basic-transation;
+}
